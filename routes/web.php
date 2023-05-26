@@ -15,7 +15,7 @@ use App\Http\Controllers\ParentController;
 |
 */
 //ROUTES FOR STUDENTS
-Route::get('/eleves', [EleveController::class, 'index'])->name('eleves.index'); // Afficher tous les élèves
+/*Route::get('/eleves', [EleveController::class, 'index'])->name('eleves.index'); // Afficher tous les élèves
 Route::get('/eleves/create', [EleveController::class, 'create'])->name('eleves.create'); // Afficher le formulaire de création d'un élève
 Route::post('/eleves', [EleveController::class, 'store'])->name('eleves.store'); // Enregistrer un nouvel élève
 Route::get('/eleves/{id}', [EleveController::class, 'show'])->name('eleves.show'); // Afficher les détails d'un élève spécifique
@@ -31,3 +31,4 @@ Route::get('/parents/{parent}/edit', [ParentController::class, 'edit'])->name('p
 Route::put('/parents/{parent}', [ParentController::class, 'update'])->name('parents.update');// Mettre à jour un parent existant
 Route::delete('/parents/{parent}', [ParentController::class, 'destroy'])->name('parents.destroy');// Supprimer un parent
 
+*/

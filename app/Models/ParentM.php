@@ -19,6 +19,8 @@ class ParentM extends Model
 
     public function eleves()
     {
-        return $this->hasMany(Eleve::class);
+        return $this->belongsToMany(Eleve::class, 'eleve_parent', 'parent_m_s_id', 'eleve_id')
+            ->withPivot('relation_type');
     }
+
 }

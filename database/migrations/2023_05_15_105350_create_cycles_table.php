@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('eleves', function (Blueprint $table) {
-            $table->enum('type', ['père', 'mère', 'tuteur'])->nullable();
+        Schema::create('cycles', function (Blueprint $table) {
+            $table->id();  
+            $table->string('Cycle')->nullable();
+            $table->timestamps();
         });
-
     }
 
     /**
@@ -22,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('eleves', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('cycles');
     }
 };

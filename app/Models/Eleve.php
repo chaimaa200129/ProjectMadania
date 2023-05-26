@@ -12,8 +12,8 @@ class Eleve extends Model
         'Matricule',
         'Nom',
         'Prénom',
-        'الاسم العائلي',
-        'الاسم الشخصي',
+        'Nom(Arabe)',
+        'Prénom(Arabe)',
         'Sexe',
         'Email',
         'date_naissance',
@@ -21,9 +21,13 @@ class Eleve extends Model
         'image'
     ];
 
-    public function parent()
+  public function parents()
     {
-        return $this->belongsTo(ParentM::class);
+        return $this->belongsToMany(ParentM::class, 'eleve_parent', 'eleve_id', 'parent_m_s_id')
+            ->withPivot('relation_type');
     }
+
+
+
     
 }

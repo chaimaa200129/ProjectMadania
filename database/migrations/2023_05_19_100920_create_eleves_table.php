@@ -15,17 +15,15 @@ return new class extends Migration
             'eleves',
             function (Blueprint $table) {
                 $table->id();
-                $table->string('Matricule')->nullable();
+                $table->string('Matricule')->unique()->nullable();
                 $table->string('Nom')->nullable();
                 $table->string('Prénom')->nullable();
-                $table->string('الاسم العائلي')->nullable();
-                $table->string('الاسم الشخصي')->nullable();
+                $table->string('Nom(Arabe)')->nullable();
+                $table->string('Prénom(Arabe)')->nullable();
                 $table->string('Sexe')->nullable();
                 $table->string('Email')->nullable();
                 $table->text('Adress')->nullable();
                 $table->date('date_naissance')->nullable();
-                $table->unsignedBigInteger('parent_id')->nullable();
-                $table->foreign('parent_id')->references('id')->on('parents');
                 $table->timestamps();
             }
         );
