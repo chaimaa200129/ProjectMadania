@@ -10,6 +10,7 @@ use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\NiveauController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\CycleController;
+use App\Http\Controllers\DomaineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,14 +75,11 @@ Route::delete('/enseignants/{id}', [EnseignantController::class, 'destroy']);
 //matiere 
 
 
-Route::prefix('matieres')->group(function () {
-    Route::get('/', [MatiereController::class, 'index']);
-    Route::post('/', [MatiereController::class, 'store']);
-    Route::get('/{id}', [MatiereController::class, 'show']);
-    Route::put('/{id}', [MatiereController::class, 'update']);
-    Route::delete('/{id}', [MatiereController::class, 'destroy']);
-});
-
+Route::get('/matieres', [MatiereController::class, 'index']);
+Route::get('/matieres/{id}', [MatiereController::class, 'show']);
+Route::post('/matieres', [MatiereController::class, 'store']);
+Route::put('/matieres/{id}', [MatiereController::class, 'update']);
+Route::delete('/matieres/{id}', [MatiereController::class, 'destroy']);
 //cycle
 
 
@@ -118,3 +116,30 @@ Route::get('/periodes/{id}', [PeriodeController::class, 'show']);
 Route::post('/periodes', [PeriodeController::class, 'store']);
 Route::put('/periodes/{id}', [PeriodeController::class, 'update']);
 Route::delete('/periodes/{id}', [PeriodeController::class, 'destroy']);
+
+//Domaine 
+
+Route::get('/domaines', [DomaineController::class, 'index']);
+Route::post('/domaines', [DomaineController::class, 'store']);
+Route::get('/domaines/{id}', [DomaineController::class, 'show']);
+Route::put('/domaines/{id}', [DomaineController::class, 'update']);
+Route::delete('/domaines/{id}', [DomaineController::class, 'destroy']);
+
+//Competences
+use App\Http\Controllers\CompetenceController;
+
+Route::get('/competences', [CompetenceController::class, 'index']);
+Route::post('/competences', [CompetenceController::class, 'store']);
+Route::get('/competences/{id}', [CompetenceController::class, 'show']);
+Route::put('/competences/{id}', [CompetenceController::class, 'update']);
+Route::delete('/competences/{id}', [CompetenceController::class, 'destroy']);
+
+//Savoir 
+
+use App\Http\Controllers\SavoirController;
+
+Route::get('/savoirs', [SavoirController::class, 'index']);
+Route::post('/savoirs', [SavoirController::class, 'store']);
+Route::get('/savoirs/{id}', [SavoirController::class, 'show']);
+Route::put('/savoirs/{id}', [SavoirController::class, 'update']);
+Route::delete('/savoirs/{id}', [SavoirController::class, 'destroy']);
