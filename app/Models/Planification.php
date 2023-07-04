@@ -12,7 +12,7 @@ class Planification extends Model
 
     public function savoir()
     {
-        return $this->belongsTo(Savoir::class);
+        return $this->belongsTo(Savoir::class,'savoir_id');
     }
 
     public function periode()
@@ -24,4 +24,5 @@ class Planification extends Model
     {
         return $this->belongsTo(Niveau::class);
     }
+    
 }

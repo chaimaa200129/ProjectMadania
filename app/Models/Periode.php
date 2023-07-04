@@ -22,4 +22,8 @@ class Periode extends Model
     {
         return $this->hasMany(Periode::class, 'ref');
     }
+     public function savoirs()
+    {
+        return $this->hasMany(Savoir::class,'savoir_id');
+    }
 }

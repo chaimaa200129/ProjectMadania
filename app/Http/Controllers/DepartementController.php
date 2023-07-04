@@ -42,7 +42,7 @@ class DepartementController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
+    { 
         // Validation des données $request->validate(...)
 
         $departement = Departement::findOrFail($id);

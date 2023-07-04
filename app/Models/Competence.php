@@ -11,6 +11,10 @@ class Competence extends Model
 
     public function domaine()
     {
-        return $this->belongsTo(Domaine::class);
+        return $this->belongsTo(Domaine::class,'domaine_id');
+    }
+    public function savoirs()
+    {
+        return $this->hasMany(Savoir::class,'savoir_id');
     }
 }

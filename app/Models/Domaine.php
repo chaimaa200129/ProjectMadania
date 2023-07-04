@@ -10,6 +10,10 @@ class Domaine extends Model
 
     public function matiere()
     {
-        return $this->belongsTo(Matiere::class);
+        return $this->belongsTo(Matiere::class,'matiere_id');
+    }
+    public function competence()
+    {
+        return $this->hasMany(Competence::class,'competence_id');
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Domaine;
 use App\Models\Matiere;
 use Illuminate\Http\Request;
+use App\Models\Competence;
+use App\Models\Savoir;
 
 class MatiereController extends Controller
 {
@@ -37,5 +39,29 @@ class MatiereController extends Controller
         $matiere = Matiere::findOrFail($id);
         $matiere->delete();
         return response()->json(null, 204);
+    }
+    public function getDomainesByMatiereId($id, $periode)
+    {
+        $domainesWithCompetences = [];
+        $domaines = Domaine::where('matiere_id', $id)->get();
+
+        foreach ($domaines as $domaine) {
+            $competences = Competence::where('domaine_id', $domaine->id)->get();
+            $savoirs = [];
+
+            foreach ($competences as $competence) {
+                $savoirs[] = Savoir::where('competence_id', $competence->id)
+                    ->where('periode_id', $periode)
+                    ->get();
+            }
+
+            $domainesWithCompetences[] = [
+                'domaine' => $domaine,
+                'competences' => $competences,
+                'savoirs' => $savoirs,
+            ];
+        }
+
+        return response()->json($domainesWithCompetences);
     }
 }

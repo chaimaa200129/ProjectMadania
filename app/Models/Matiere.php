@@ -19,4 +19,9 @@ class Matiere extends Model
     {
         return $this->belongsToMany(Enseignant::class, 'enseignant_matiere');
     }
+ public function domaine()
+    {
+        return $this->hasMany(Domaine::class, 'domaine_id');
+    }
 }
+

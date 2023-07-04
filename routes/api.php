@@ -11,6 +11,10 @@ use App\Http\Controllers\NiveauController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\DomaineController;
+use App\Http\Controllers\CompetenceController;
+use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\SavoirController;
+use App\Http\Controllers\AffectationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +30,10 @@ use App\Http\Controllers\DomaineController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/matieres', 'MatiereController@index');
+
+Route::get('/matieres/{id}/domaines', 'DomaineController@index');
 
 //eleve 
 //restaurer tous les eleves
@@ -121,12 +129,13 @@ Route::delete('/periodes/{id}', [PeriodeController::class, 'destroy']);
 
 Route::get('/domaines', [DomaineController::class, 'index']);
 Route::post('/domaines', [DomaineController::class, 'store']);
-Route::get('/domaines/{id}', [DomaineController::class, 'show']);
+Route::get('/domaines/{id}', [DomaineController::class, 'show',]);
 Route::put('/domaines/{id}', [DomaineController::class, 'update']);
 Route::delete('/domaines/{id}', [DomaineController::class, 'destroy']);
+Route::get('/matieres/{id}/domaines/{periode}', [MatiereController::class, 'getDomainesByMatiereId']);
+
 
 //Competences
-use App\Http\Controllers\CompetenceController;
 
 Route::get('/competences', [CompetenceController::class, 'index']);
 Route::post('/competences', [CompetenceController::class, 'store']);
@@ -136,10 +145,24 @@ Route::delete('/competences/{id}', [CompetenceController::class, 'destroy']);
 
 //Savoir 
 
-use App\Http\Controllers\SavoirController;
 
 Route::get('/savoirs', [SavoirController::class, 'index']);
 Route::post('/savoirs', [SavoirController::class, 'store']);
 Route::get('/savoirs/{id}', [SavoirController::class, 'show']);
 Route::put('/savoirs/{id}', [SavoirController::class, 'update']);
 Route::delete('/savoirs/{id}', [SavoirController::class, 'destroy']);
+
+//EVALUATIONS
+Route::get('/evaluations', [EvaluationController::class, 'index']);
+Route::post('/evaluations', [EvaluationController::class, 'store']);
+Route::get('/evaluations/{id}', [EvaluationController::class, 'show']);
+Route::put('/evaluations/{id}', [EvaluationController::class, 'update']);
+Route::delete('/evaluations/{id}', [EvaluationController::class, 'destroy']);
+
+//AFFECTATION 
+
+Route::get('/affectations', [AffectationController::class, 'index']);
+Route::post('/affectations', [AffectationController::class, 'store']);
+Route::get('/affectations/{id}', [AffectationController::class, 'show']);
+Route::put('/affectations/{id}', [AffectationController::class, 'update']);
+Route::delete('/affectations/{id}', [AffectationController::class, 'destroy']);

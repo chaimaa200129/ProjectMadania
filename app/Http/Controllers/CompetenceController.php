@@ -1,7 +1,6 @@
 <?php
 
 // app/Http/Controllers/CompetenceController.php
-
 namespace App\Http\Controllers;
 
 use App\Models\Competence;

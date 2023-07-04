@@ -9,20 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('cycles', function (Blueprint $table) {
-            $table->id();  
-            $table->string('Cycle')->nullable();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::table('niveaux', function (Blueprint $table) {
+        $table->string('code_niveau')->after('id')->nullable();
+    });
+}
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('cycles');
+        Schema::table('niveaux', function (Blueprint $table) {
+            //
+        });
     }
 };

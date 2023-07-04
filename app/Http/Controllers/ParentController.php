@@ -13,6 +13,7 @@ class ParentController extends Controller
      * Display a listing of the resource.
      *
      * @return JsonResponse
+     * @author chaimaa
      */
    public function index()
     {
