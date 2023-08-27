@@ -22,6 +22,8 @@ return new class extends Migration
             $table->foreign('eleve_id')->references('id')->on('eleves');
             $table->foreign('savoir_id')->references('id')->on('savoirs');
             $table->foreign('periode_id')->references('id')->on('periodes');
+            $table->unsignedBigInteger('status_id');
+
         });
     }
 

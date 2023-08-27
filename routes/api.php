@@ -15,6 +15,8 @@ use App\Http\Controllers\CompetenceController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\SavoirController;
 use App\Http\Controllers\AffectationController;
+use App\Http\Controllers\Auth\GoogleAuthController;
+ use App\Http\Controllers\PlanificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,10 @@ use App\Http\Controllers\AffectationController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+//API GOOGLE
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/google-login', [GoogleAuthController::class, 'googleLogin']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -153,16 +159,42 @@ Route::put('/savoirs/{id}', [SavoirController::class, 'update']);
 Route::delete('/savoirs/{id}', [SavoirController::class, 'destroy']);
 
 //EVALUATIONS
-Route::get('/evaluations', [EvaluationController::class, 'index']);
-Route::post('/evaluations', [EvaluationController::class, 'store']);
-Route::get('/evaluations/{id}', [EvaluationController::class, 'show']);
-Route::put('/evaluations/{id}', [EvaluationController::class, 'update']);
-Route::delete('/evaluations/{id}', [EvaluationController::class, 'destroy']);
 
-//AFFECTATION 
+Route::get('/evaluations', [EvaluationController::class, 'index']);
+Route::get('/evaluations/{evaluation}', [EvaluationController::class, 'show']);
+Route::post('/evaluations', [EvaluationController::class, 'store']);
+Route::put('/evaluations/{evaluation}', [EvaluationController::class, 'update']);
+Route::delete('/evaluations/{evaluation}', [EvaluationController::class, 'destroy']);
+Route::get('/evaluations/{evaluation}/status', [EvaluationController::class, 'getStatus']);
+Route::put('/evaluations/{evaluation}/status', [EvaluationController::class, 'updateStatus']);
+
+
+//AFFECTATIONS 
 
 Route::get('/affectations', [AffectationController::class, 'index']);
 Route::post('/affectations', [AffectationController::class, 'store']);
 Route::get('/affectations/{id}', [AffectationController::class, 'show']);
 Route::put('/affectations/{id}', [AffectationController::class, 'update']);
 Route::delete('/affectations/{id}', [AffectationController::class, 'destroy']);
+ //planifications
+
+Route::get('/planifications', [PlanificationController::class, 'index']);
+Route::post('/planifications', [PlanificationController::class, 'store']);
+Route::get('/planifications/{id}', [PlanificationController::class, 'show']);
+Route::put('/planifications/{id}', [PlanificationController::class, 'update']);
+Route::delete('/planifications/{id}', [PlanificationController::class, 'destroy']);
+ Route::get('/niveaux/{niveauId}/matieres/{matiereId}/planning', [PlanificationController::class, 'getPlanningByNiveauAndMatiere']);
+
+//Appreciations
+Route::get('/appreciations', 'AppreciationController@index');
+Route::post('/appreciations', 'AppreciationController@store');
+Route::get('/appreciations/{id}', 'AppreciationController@show');
+Route::put('/appreciations/{id}', 'AppreciationController@update');
+Route::delete('/appreciations/{id}', 'AppreciationController@destroy');
+
+//signature et impression
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::post('livret/signature', 'LivretController@saveSignature');
+    Route::get('livret/print', 'LivretController@showLivret');
+});

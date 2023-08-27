@@ -21,4 +21,8 @@ class Classe extends Model
     {
         return $this->belongsTo(Niveau::class);
     }
+     public function publication()
+    {
+        return $this->hasOne(Publication::class);
+    }
 }

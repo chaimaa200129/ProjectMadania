@@ -1,59 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\API;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Affectation;
+use Illuminate\Support\Facades\Response;
 
 class AffectationController extends Controller
 {
     public function index()
     {
         $affectations = Affectation::all();
-
-        return response()->json($affectations);
+        return Response::json($affectations);
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'enseignant_id' => 'required|exists:enseignants,id',
-            'matiere_id' => 'required|exists:matieres,id',
-            'classe_id' => 'required|exists:classes,id',
-        ]);
-
-        $affectation = Affectation::create($validatedData);
-
-        return response()->json($affectation, 201);
+        $affectation = Affectation::create($request->all());
+        return Response::json($affectation, 201);
     }
 
-    public function show($id)
+    public function show(Affectation $affectation)
     {
-        $affectation = Affectation::findOrFail($id);
-
-        return response()->json($affectation);
+        return Response::json($affectation);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Affectation $affectation)
     {
-        $validatedData = $request->validate([
-            'enseignant_id' => 'required|exists:enseignants,id',
-            'matiere_id' => 'required|exists:matieres,id',
-            'classe_id' => 'required|exists:classes,id',
-        ]);
-
-        $affectation = Affectation::findOrFail($id);
-        $affectation->update($validatedData);
-
-        return response()->json($affectation);
+        $affectation->update($request->all());
+        return Response::json($affectation);
     }
 
-    public function destroy($id)
+    public function destroy(Affectation $affectation)
     {
-        $affectation = Affectation::findOrFail($id);
         $affectation->delete();
-
-        return response()->json(null, 204);
+        return Response::json(null, 204);
     }
 }

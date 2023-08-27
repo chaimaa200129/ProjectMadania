@@ -26,6 +26,12 @@ class Eleve extends Model
         return $this->belongsToMany(ParentM::class, 'eleve_parent', 'eleve_id', 'parent_m_s_id')
             ->withPivot('relation_type');
     }
+// Dans le modèle Eleve (app/Models/Eleve.php)
+
+public function appreciations()
+{
+    return $this->hasMany(Appreciation::class);
+}
 
 
 
